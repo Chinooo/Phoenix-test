@@ -1,17 +1,17 @@
 ## Start Postgres container
-To start your Postgres container run
+#To start your Postgres container run
   * run docker-compse up -d
-Check the container id
+#Check the container id
   * docker ps
-Change permissions
+#Change permissions
   * docker exec -it 375f2ac24c42 chown postgres.postgres /var/lib/postgres/db.out
-Get into the container
+#Get into the container
   * docker exec -it containerid bash
-Run the next commands
+#Run the next commands
   * su postgres
   * psql -h localhost  -p 5432 < /var/lib/postgres/db.out
   * \q
-Exit the container
+#Exit the container
   * exit (to log out from postgres user)
   * exit (again to logout)
 
