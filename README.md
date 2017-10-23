@@ -1,19 +1,12 @@
 ## Start Postgres container
-#To start your Postgres container run
-  * run docker-compse up -d
-#Check the container id
-  * docker ps
-#Change permissions
-  * docker exec -it 375f2ac24c42 chown postgres.postgres /var/lib/postgres/db.out
-#Get into the container
-  * docker exec -it containerid bash
-#Run the next commands
-  * su postgres
-  * psql -h localhost  -p 5432 < /var/lib/postgres/db.out
-  * \q
-#Exit the container
-  * exit (to log out from postgres user)
-  * exit (again to logout)
+To start your Postgres container run
+  * Download image `run docker-compse up -d`
+  * Check the container id `docker ps`
+  * Change permissions `docker exec -it 375f2ac24c42 chown postgres.postgres /var/lib/postgres/db.out`
+  * Get into the container `docker exec -it containerid bash`
+  * Run the next commands `su postgres` and then `psql -h localhost  -p 5432 < /var/lib/postgres/db.out`
+  * Exit the postgres user with the next command `exit`
+  * Again to log out the root user `exit`
 
 ## Starting Server    
 To start your Phoenix server:
