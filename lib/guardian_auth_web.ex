@@ -41,6 +41,7 @@ defmodule GuardianAuthWeb do
       import GuardianAuthWeb.ErrorHelpers
       import GuardianAuthWeb.Gettext
       import GuardianAuth.Session
+      import ReactPhoenix
     end
   end
 

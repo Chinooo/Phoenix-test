@@ -14,6 +14,6 @@ config :guardian_auth, GuardianAuth.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "guardian_auth_test",
-  hostname: "localhost",
+  database: "test_test",
+  hostname: "db",
   pool: Ecto.Adapters.SQL.Sandbox

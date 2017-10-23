@@ -4,7 +4,7 @@ defmodule GuardianAuth.Auth do
 
   def login(conn, user) do
     conn
-    |> Guardian.Plug.sign_in(user)
+    |> Guardian.Plug.api_sign_in(user)
   end
 
   def login_by_email_and_pass(conn, email, given_pass, opts) do

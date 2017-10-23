@@ -21,21 +21,38 @@ defmodule GuardianAuthWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", GuardianAuthWeb do
-    pipe_through [:browser,:browser_auth]
-    resources "/sessions", SessionController, only: [:new, :create,:delete  ]
-    resources "/users", UserController, only: [:new,:create]
+       pipe_through [:api] # Use the default browser stack
 
+       resources "/users", UserController, except: [:new, :edit, :show, :index]
+       resources "/sessions", SessionController, only: [:new, :create,:delete]
+       #       get "/", PageController, :index
   end
-
 
   scope "/", GuardianAuthWeb do
-    pipe_through [:browser,:browser_auth,:ensure_authed_access]
-    get "/", PageController, :index
-    resources "/users", UserController, only: [:show, :index, :update,:edit,:delete]
+       pipe_through [:api, :ensure_authed_access] # Use the default browser stack
+
+       resources "/users", UserController, except: [:new, :edit]
+       resources "/sessions", SessionController, only: [:new, :create,:delete]
+       #       get "/", PageController, :index
   end
+
+    scope "/", GuardianAuthWeb do
+      pipe_through [:browser]
+      #resources "/sessions", SessionController, only: [:new, :create,:delete  ]
+      #resources "/users", UserController, only: [:new,:create]
+
+    end
+  #
+  #
+  #  scope "/", GuardianAuthWeb do
+  #    pipe_through [:browser]
+  #    get "/", PageController, :index
+  #    resources "/users", UserController, only: [:show, :index, :update,:edit,:delete]
+  #  end
 
 end
-

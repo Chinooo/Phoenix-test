@@ -53,6 +53,6 @@ config :guardian_auth, GuardianAuth.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "guardian_auth",
-  hostname: "localhost",
+  database: "test",
+  hostname: "db",
   pool_size: 4
