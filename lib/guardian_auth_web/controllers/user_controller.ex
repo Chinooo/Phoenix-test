@@ -5,7 +5,7 @@ defmodule GuardianAuthWeb.UserController do
   alias GuardianAuth.Accounts.User
   alias GuardianAuth.Repo
 
-  action_fallback GuardianAuthWeb.FallbackController
+  #action_fallback GuardianAuthWeb.FallbackController
 
   def index(conn, _params) do
     users = Accounts.list_users()

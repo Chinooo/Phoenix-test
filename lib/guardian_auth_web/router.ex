@@ -21,13 +21,13 @@ defmodule GuardianAuthWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
-    plug Guardian.Plug.LoadResource
+    #plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    #plug Guardian.Plug.LoadResource
   end
 
   scope "/", GuardianAuthWeb do
        pipe_through [:api] # Use the default browser stack
-
+       resources "/projects", ProjectController, except: [:new, :edit]
        resources "/users", UserController, except: [:new, :edit, :show, :index]
        resources "/sessions", SessionController, only: [:new, :create,:delete]
        #       get "/", PageController, :index
