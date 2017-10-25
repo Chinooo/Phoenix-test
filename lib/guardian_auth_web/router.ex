@@ -27,10 +27,15 @@ defmodule GuardianAuthWeb.Router do
 
   scope "/", GuardianAuthWeb do
        pipe_through [:api] # Use the default browser stack
-       resources "/projects", ProjectController, except: [:new, :edit]
+       #resources "/deploys", DeployController, except: [:new, :edit]
+       resources "/projects", ProjectController, except: [:new, :edit] do
+         resources "/deploys", DeployController, except: [:new, :edit, :update]
+         put "/deploys", DeployController, :update
+       end
        resources "/users", UserController, except: [:new, :edit, :show, :index]
        resources "/sessions", SessionController, only: [:new, :create,:delete]
        #       get "/", PageController, :index
+
   end
 
   scope "/", GuardianAuthWeb do

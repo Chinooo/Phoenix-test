@@ -126,4 +126,130 @@ defmodule GuardianAuth.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_project(project)
     end
   end
+
+  describe "deploys" do
+    alias GuardianAuth.Accounts.Deploy
+
+    @valid_attrs %{active: true, title: "some title"}
+    @update_attrs %{active: false, title: "some updated title"}
+    @invalid_attrs %{active: nil, title: nil}
+
+    def deploy_fixture(attrs \\ %{}) do
+      {:ok, deploy} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_deploy()
+
+      deploy
+    end
+
+    test "list_deploys/0 returns all deploys" do
+      deploy = deploy_fixture()
+      assert Accounts.list_deploys() == [deploy]
+    end
+
+    test "get_deploy!/1 returns the deploy with given id" do
+      deploy = deploy_fixture()
+      assert Accounts.get_deploy!(deploy.id) == deploy
+    end
+
+    test "create_deploy/1 with valid data creates a deploy" do
+      assert {:ok, %Deploy{} = deploy} = Accounts.create_deploy(@valid_attrs)
+      assert deploy.active == true
+      assert deploy.title == "some title"
+    end
+
+    test "create_deploy/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_deploy(@invalid_attrs)
+    end
+
+    test "update_deploy/2 with valid data updates the deploy" do
+      deploy = deploy_fixture()
+      assert {:ok, deploy} = Accounts.update_deploy(deploy, @update_attrs)
+      assert %Deploy{} = deploy
+      assert deploy.active == false
+      assert deploy.title == "some updated title"
+    end
+
+    test "update_deploy/2 with invalid data returns error changeset" do
+      deploy = deploy_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_deploy(deploy, @invalid_attrs)
+      assert deploy == Accounts.get_deploy!(deploy.id)
+    end
+
+    test "delete_deploy/1 deletes the deploy" do
+      deploy = deploy_fixture()
+      assert {:ok, %Deploy{}} = Accounts.delete_deploy(deploy)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_deploy!(deploy.id) end
+    end
+
+    test "change_deploy/1 returns a deploy changeset" do
+      deploy = deploy_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_deploy(deploy)
+    end
+  end
+
+  describe "deploys" do
+    alias GuardianAuth.Accounts.Deploy
+
+    @valid_attrs %{active: true, project_id: 42, title: "some title"}
+    @update_attrs %{active: false, project_id: 43, title: "some updated title"}
+    @invalid_attrs %{active: nil, project_id: nil, title: nil}
+
+    def deploy_fixture(attrs \\ %{}) do
+      {:ok, deploy} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_deploy()
+
+      deploy
+    end
+
+    test "list_deploys/0 returns all deploys" do
+      deploy = deploy_fixture()
+      assert Accounts.list_deploys() == [deploy]
+    end
+
+    test "get_deploy!/1 returns the deploy with given id" do
+      deploy = deploy_fixture()
+      assert Accounts.get_deploy!(deploy.id) == deploy
+    end
+
+    test "create_deploy/1 with valid data creates a deploy" do
+      assert {:ok, %Deploy{} = deploy} = Accounts.create_deploy(@valid_attrs)
+      assert deploy.active == true
+      assert deploy.project_id == 42
+      assert deploy.title == "some title"
+    end
+
+    test "create_deploy/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_deploy(@invalid_attrs)
+    end
+
+    test "update_deploy/2 with valid data updates the deploy" do
+      deploy = deploy_fixture()
+      assert {:ok, deploy} = Accounts.update_deploy(deploy, @update_attrs)
+      assert %Deploy{} = deploy
+      assert deploy.active == false
+      assert deploy.project_id == 43
+      assert deploy.title == "some updated title"
+    end
+
+    test "update_deploy/2 with invalid data returns error changeset" do
+      deploy = deploy_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_deploy(deploy, @invalid_attrs)
+      assert deploy == Accounts.get_deploy!(deploy.id)
+    end
+
+    test "delete_deploy/1 deletes the deploy" do
+      deploy = deploy_fixture()
+      assert {:ok, %Deploy{}} = Accounts.delete_deploy(deploy)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_deploy!(deploy.id) end
+    end
+
+    test "change_deploy/1 returns a deploy changeset" do
+      deploy = deploy_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_deploy(deploy)
+    end
+  end
 end

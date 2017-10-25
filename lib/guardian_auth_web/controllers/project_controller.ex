@@ -23,6 +23,8 @@ defmodule GuardianAuthWeb.ProjectController do
 
   def create(conn, %{"project" => project_params}) do
       with {:ok, %Project{} = project} <- Accounts.create_project(project_params) do
+        res = Accounts.create_deploy(%{"project_id" => project.id, "title" => "This is a title"})
+        IO.inspect res
       conn
       |> put_status(:created)
       |> put_resp_header("location", project_path(conn, :show, project))
