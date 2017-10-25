@@ -1,3 +1,33 @@
+## Prerequisites
+* Install [Terraform][1]
+* AWS credentials and a pem file
+
+## Usage
+
+1. Update the `terraform.tfvars` file with your AWS credentials:
+
+    ```
+    access_key = my_AWS_access_key
+    secret_key = my_AWS_secret_key
+    ssh_key_name = name_of_my_PEM_file_for_AWS
+    ```
+2. Move your pem file to the root of the project
+3. Execute terraform plan
+    ```
+    $ terraform plan
+    ```
+4. Then execute apply
+    ```
+    $ terraform plan
+    ```
+
+__Useful commands__
+`terraform validate`
+`terraform fmt`
+`terraform plan`
+`terraform graph | dot -Tpng > graph.png`
+`watch kubectl get pods -n devops`
+
 ## Start Postgres container
 To start your Postgres container run
   * Download image `run docker-compse up -d`
